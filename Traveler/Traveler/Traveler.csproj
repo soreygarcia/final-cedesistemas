@@ -18,12 +18,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppConfigurations.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\AppResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\AppConfigurations.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppConfigurations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\NewPlacePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

@@ -26,6 +26,8 @@ namespace Traveler.Services.Api
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Add("ZUMO-API-VERSION", "2.0.0");
+
                     var url = AppConfigurations.ApiRoot + AppConfigurations.GetAllPlacesEndpoint;
 
                     var body = new StringContent(JsonConvert.SerializeObject(placeModel), Encoding.UTF8, "application/json");
@@ -55,6 +57,8 @@ namespace Traveler.Services.Api
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Add("ZUMO-API-VERSION", "2.0.0");
+
                     var url = AppConfigurations.ApiRoot + AppConfigurations.GetAllPlacesEndpoint;
                     var result = await client.GetAsync(url);
                     string data = await result.Content.ReadAsStringAsync();
