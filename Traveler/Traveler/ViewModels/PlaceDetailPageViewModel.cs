@@ -14,7 +14,7 @@ namespace Traveler.ViewModels
 
         public PlaceDetailPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-
+            
         }
 
         public override void OnNavigatingTo(NavigationParameters parameters)

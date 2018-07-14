@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Traveler.Views.PlaceDetailPage"
              Title="{Binding SelectedPlace.Name}">
@@ -24,5 +25,10 @@
                 Grid.Column="1"
                 Source="{Binding Picture}"></Image>
         </Grid>
+        <maps:Map 
+            MapType="Street"
+            IsShowingUser="True"
+            Grid.Row="1" VerticalOptions="FillAndExpand" 
+            HorizontalOptions="FillAndExpand"></maps:Map>
     </Grid>
 </ContentPage>
