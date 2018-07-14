@@ -31,6 +31,7 @@
         </Grid>
         <maps:Map 
             MapType="Street"
+            
             IsShowingUser="True"
             Grid.Row="1" VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand">

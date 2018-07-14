@@ -1,8 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Traveler.Controls"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:behaviours="clr-namespace:Traveler.Behaviours"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Traveler.Views.NewPlacePage">
-  
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ScrollView>
+            <StackLayout Padding="20">
+                <Label Text="Nombre"></Label>
+                <Entry Text="{Binding Name, Mode=TwoWay}"></Entry>
+                <Label Text="Descripción"></Label>
+                <Editor  Text="{Binding Description, Mode=TwoWay}"></Editor>
+                <Button Text="Crear" Command="{Binding CreateCommand}"></Button>
+            </StackLayout>
+        </ScrollView>
+        <controls:ExtendedMap 
+            x:Name="NewMap"
+            Tap="MainPage_Tap"
+            MapType="Street"
+            IsShowingUser="True"
+            Grid.Row="1" VerticalOptions="FillAndExpand" 
+            HorizontalOptions="FillAndExpand">
+            <maps:Map.Behaviors>
+                <behaviours:MapBehavior ItemsSource="{Binding Items}" />
+            </maps:Map.Behaviors>
+        </controls:ExtendedMap>
+    </Grid>
 </ContentPage>

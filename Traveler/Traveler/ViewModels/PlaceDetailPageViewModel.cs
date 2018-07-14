@@ -24,6 +24,13 @@ namespace Traveler.ViewModels
         {
             OpenWazeCommand = new DelegateCommand(OpenWaze);
             Items = new ObservableCollection<ILocationViewModel>();
+
+            Items.CollectionChanged += Items_CollectionChanged;
+        }
+
+        private void Items_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            RaisePropertyChanged(nameof(Items));
         }
 
         private void OpenWaze()
@@ -45,13 +52,18 @@ namespace Traveler.ViewModels
         public override void OnNavigatingTo(NavigationParameters parameters)
         {
             SelectedPlace = (PlaceModel)parameters["SelectedPlace"];
-            Items.Add(new LocationItemViewModel()
+
+            var itemsTemp = new ObservableCollection<ILocationViewModel>();
+            var item = new LocationItemViewModel()
             {
                 Title = SelectedPlace.Name,
-                Latitude = Convert.ToDouble(SelectedPlace.Latitude),
-                Longitude = Convert.ToDouble(SelectedPlace.Longitude),
+                Latitude = Convert.ToDouble(SelectedPlace.Latitude.Replace(".",",")),
+                Longitude = Convert.ToDouble(SelectedPlace.Longitude.Replace(".", ",")),
                 Command = OpenWazeCommand
-            });
+            };
+
+            itemsTemp.Add(item);
+            Items = itemsTemp;
 
             base.OnNavigatingTo(parameters);
         }

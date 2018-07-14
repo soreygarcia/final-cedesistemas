@@ -25,7 +25,7 @@ namespace Traveler.Behaviours
         {
             var behavior = bindable as MapBehavior;
             if (behavior == null) return;
-            behavior.AddPins();
+                behavior.AddPins();
         }
 
         private void AddPins()
@@ -55,7 +55,7 @@ namespace Traveler.Behaviours
             foreach (var pin in pins)
                 map.Pins.Add(pin);
 
-            PositionMap();
+            PositionMap(map.Pins.Count > 1);
         }
 
         private void PinOnClicked(object sender, EventArgs eventArgs)
@@ -67,7 +67,7 @@ namespace Traveler.Behaviours
             viewModel.Command.Execute(null);
         }
 
-        private void PositionMap()
+        private void PositionMap(bool calculateDistance)
         {
             if (ItemsSource == null || !ItemsSource.Any()) return;
 
@@ -79,13 +79,19 @@ namespace Traveler.Behaviours
             var maxLongitude = ItemsSource.Max(x => x.Longitude);
             var maxLatitude = ItemsSource.Max(x => x.Latitude);
 
-            var distance = MapHelper.CalculateDistance(minLatitude, minLongitude,
-                maxLatitude, maxLongitude, 'M') / 2;
+            Double distance = 50;
+
+            if (calculateDistance)
+            {
+                distance = MapHelper.CalculateDistance(minLatitude, minLongitude,
+                 maxLatitude, maxLongitude, 'M') / 2;
+            }
 
             AssociatedObject.MoveToRegion(MapSpan.FromCenterAndRadius(centerPosition, Distance.FromMiles(distance)));
 
             Device.StartTimer(TimeSpan.FromMilliseconds(500), () =>
             {
+                
                 AssociatedObject.MoveToRegion(MapSpan.FromCenterAndRadius(centerPosition, Distance.FromMiles(distance)));
                 return false;
             });

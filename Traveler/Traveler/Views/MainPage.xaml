@@ -31,5 +31,10 @@
             </DataTemplate>
         </controls:ExtendedListView.ItemTemplate>
     </controls:ExtendedListView>
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding NavigateCommand}"
+                     CommandParameter="NewPlacePage"></ToolbarItem>
+        <ToolbarItem Text="About" Command="{Binding NavigateCommand}"
+                     CommandParameter="AboutPage"></ToolbarItem>
+    </ContentPage.ToolbarItems>
 </ContentPage>

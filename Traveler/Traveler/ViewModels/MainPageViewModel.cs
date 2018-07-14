@@ -22,6 +22,7 @@ namespace Traveler.ViewModels
         private readonly IApiService _apiService;
 
         public ICommand SelectPlaceCommand { get; set; }
+        public ICommand NavigateCommand { get; set; }
 
         public MainPageViewModel(INavigationService navigationService, IDialogsService dialogsService, IApiService apiService)
             : base(navigationService)
@@ -33,6 +34,13 @@ namespace Traveler.ViewModels
 
             SelectPlaceCommand = new DelegateCommand<PlaceModel>
                 (async (selectedPlace) => await SelectPlace(selectedPlace));
+            NavigateCommand = new DelegateCommand<string>
+                (async (pageKey) => await Navigate(pageKey));
+        }
+
+        private async Task Navigate(string pageKey)
+        {
+            await _navigationService.NavigateAsync(pageKey);
         }
 
         public ObservableCollection<PlaceModel> Places { get; set; } 
