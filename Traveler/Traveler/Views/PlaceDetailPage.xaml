@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:behaviours="clr-namespace:Traveler.Behaviours"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Traveler.Views.PlaceDetailPage"
              Title="{Binding SelectedPlace.Name}">
@@ -32,6 +33,10 @@
             MapType="Street"
             IsShowingUser="True"
             Grid.Row="1" VerticalOptions="FillAndExpand" 
-            HorizontalOptions="FillAndExpand"></maps:Map>
+            HorizontalOptions="FillAndExpand">
+            <maps:Map.Behaviors>
+                <behaviours:MapBehavior ItemsSource="{Binding Items}" />
+            </maps:Map.Behaviors>
+        </maps:Map>
     </Grid>
 </ContentPage>
