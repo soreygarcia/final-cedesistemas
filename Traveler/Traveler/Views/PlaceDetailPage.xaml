@@ -38,5 +38,11 @@
                 <behaviours:MapBehavior ItemsSource="{Binding Items}" />
             </maps:Map.Behaviors>
         </maps:Map>
+
+        <!--<controls:CodeMaskEntry.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding ValidateFormCommand}" />
+                        </controls:CodeMaskEntry.Behaviors>-->
     </Grid>
 </ContentPage>

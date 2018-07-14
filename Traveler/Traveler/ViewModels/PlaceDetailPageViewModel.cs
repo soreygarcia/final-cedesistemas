@@ -3,9 +3,12 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using Traveler.Models;
+using Traveler.ViewModels.Contracts;
+using Traveler.ViewModels.Domain;
 using Xamarin.Forms;
 
 namespace Traveler.ViewModels
@@ -15,10 +18,12 @@ namespace Traveler.ViewModels
         public PlaceModel SelectedPlace { get; set; }
 
         public ICommand OpenWazeCommand { get; set; }
+        public ObservableCollection<ILocationViewModel> Items { get; set; }
 
         public PlaceDetailPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             OpenWazeCommand = new DelegateCommand(OpenWaze);
+            Items = new ObservableCollection<ILocationViewModel>();
         }
 
         private void OpenWaze()
@@ -40,6 +45,13 @@ namespace Traveler.ViewModels
         public override void OnNavigatingTo(NavigationParameters parameters)
         {
             SelectedPlace = (PlaceModel)parameters["SelectedPlace"];
+            Items.Add(new LocationItemViewModel()
+            {
+                Title = SelectedPlace.Name,
+                Latitude = Convert.ToDouble(SelectedPlace.Latitude),
+                Longitude = Convert.ToDouble(SelectedPlace.Longitude),
+                Command = OpenWazeCommand
+            });
 
             base.OnNavigatingTo(parameters);
         }
