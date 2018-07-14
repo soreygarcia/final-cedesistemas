@@ -11,19 +11,22 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Padding="10" BindingContext="{Binding SelectedPlace}">
+        <Grid Padding="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackLayout VerticalOptions="CenterAndExpand" >
-                <Label FontAttributes="Bold" Text="{Binding Name}"></Label>
-                <Label Text="{Binding Description}"></Label>
+                <Label FontAttributes="Bold" Text="{Binding SelectedPlace.Name}"></Label>
+                <Label Text="{Binding SelectedPlace.Description}"></Label>
+                <Button Text="Como llegar" 
+                        Command="{Binding OpenWazeCommand}">
+                </Button>
             </StackLayout>
             <Image 
                 WidthRequest="100"
                 Grid.Column="1"
-                Source="{Binding Picture}"></Image>
+                Source="{Binding SelectedPlace.Picture}"></Image>
         </Grid>
         <maps:Map 
             MapType="Street"
