@@ -5,6 +5,9 @@ using Traveler.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.DryIoc;
+using Traveler.Services.Api;
+using Traveler.Services.Network;
+using Traveler.Services.Dialogs;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Traveler
@@ -32,6 +35,10 @@ namespace Traveler
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
             containerRegistry.RegisterForNavigation<NewPlacePage>();
+
+            containerRegistry.Register<IApiService, ApiService>();
+            containerRegistry.Register<INetworkService, NetworkService>();
+            containerRegistry.Register<IDialogsService, DialogsService>();
         }
     }
 }
