@@ -14,8 +14,7 @@ namespace Traveler.ViewModels
 
         public PlaceDetailPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            SelectedPlace = new PlaceModel();
-            Title = SelectedPlace.Name;
+
         }
 
         public override void OnNavigatingTo(NavigationParameters parameters)
