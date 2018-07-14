@@ -39,6 +39,7 @@ namespace Traveler
             containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.Register<INetworkService, NetworkService>();
             containerRegistry.Register<IDialogsService, DialogsService>();
+            containerRegistry.RegisterForNavigation<PlaceDetailPage>();
         }
     }
 }
