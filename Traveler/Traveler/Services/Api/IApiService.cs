@@ -9,6 +9,6 @@ namespace Traveler.Services.Api
     public interface IApiService
     {
         Task<ContentResponse<List<PlaceModel>>> GetAllPlaces();
-        Task<ContentResponse<PlaceModel>> CreatePlace();
+        Task<ContentResponse<PlaceModel>> CreatePlace(PlaceModel placeModel);
     }
 }
