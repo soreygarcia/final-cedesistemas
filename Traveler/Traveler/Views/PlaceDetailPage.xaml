@@ -5,5 +5,24 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Traveler.Views.PlaceDetailPage"
              Title="{Binding SelectedPlace.Name}">
-  
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Padding="10" BindingContext="{Binding SelectedPlace}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackLayout VerticalOptions="CenterAndExpand" >
+                <Label FontAttributes="Bold" Text="{Binding Name}"></Label>
+                <Label Text="{Binding Description}"></Label>
+            </StackLayout>
+            <Image 
+                WidthRequest="100"
+                Grid.Column="1"
+                Source="{Binding Picture}"></Image>
+        </Grid>
+    </Grid>
 </ContentPage>
