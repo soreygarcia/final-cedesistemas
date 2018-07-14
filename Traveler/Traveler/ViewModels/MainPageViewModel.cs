@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Traveler.Models;
 using Traveler.Resources;
 
@@ -20,6 +21,8 @@ namespace Traveler.ViewModels
         private readonly IDialogsService _dialogsService;
         private readonly IApiService _apiService;
 
+        public ICommand SelectPlaceCommand { get; set; }
+
         public MainPageViewModel(INavigationService navigationService, IDialogsService dialogsService, IApiService apiService)
             : base(navigationService)
         {
@@ -27,9 +30,20 @@ namespace Traveler.ViewModels
 
             _dialogsService = dialogsService;
             _apiService = apiService;
+
+            SelectPlaceCommand = new DelegateCommand<PlaceModel>
+                (async (selectedPlace) => await SelectPlace(selectedPlace));
         }
 
-        public ObservableCollection<PlaceModel> Places { get; set; }
+        public ObservableCollection<PlaceModel> Places { get; set; } 
+
+        private async Task SelectPlace(PlaceModel selectedPlace)
+        {
+            NavigationParameters parameters = new NavigationParameters();
+            parameters.Add("SelectedPlace", selectedPlace);
+
+            await _navigationService.NavigateAsync("PlaceDetailPage", parameters);
+        }
 
         public override async void OnNavigatingTo(NavigationParameters parameters)
         {
@@ -41,6 +55,8 @@ namespace Traveler.ViewModels
         {
             try
             {
+                _dialogsService.ShowDialog();
+
                 var result = await _apiService.GetAllPlaces();
                 if (result.HttpResponse.IsSuccessStatusCode)
                 {
@@ -48,14 +64,18 @@ namespace Traveler.ViewModels
                 }
                 else
                 {
-                    await _dialogsService.ShowMessage(AppResources.ApplicationName, 
+                    await _dialogsService.ShowMessage(AppResources.ApplicationName,
                         "Ha ocurrido un error inesperado.");
                 }
             }
             catch (Exception)
             {
-                await _dialogsService.ShowMessage(AppResources.ApplicationName, 
-                    "Ha ocurrido un error inesperado.");
+                await _dialogsService.ShowMessage(AppResources.ApplicationName,
+                    "Ha ocurrido un error inesperado. Verifique su conexion a internet.");
+            }
+            finally
+            {
+                _dialogsService.HideDialog();
             }
         }
     }

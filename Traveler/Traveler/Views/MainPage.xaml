@@ -7,21 +7,23 @@
 
     <controls:ExtendedListView
         HasUnevenRows="True"
+        TappedCommand="{Binding SelectPlaceCommand}"
         IsSelectionEnabled="False"
         ItemsSource="{Binding Places}">
         <controls:ExtendedListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <Grid>
+                    <Grid Padding="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <StackLayout>
-                            <Label Text="{Binding Name}"></Label>
+                        <StackLayout VerticalOptions="CenterAndExpand" >
+                            <Label FontAttributes="Bold" Text="{Binding Name}"></Label>
                             <Label Text="{Binding Description}"></Label>
                         </StackLayout>
                         <Image 
+                            WidthRequest="100"
                             Grid.Column="1"
                             Source="{Binding Picture}"></Image>
                     </Grid>
